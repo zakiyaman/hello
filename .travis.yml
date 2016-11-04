@@ -17,4 +17,5 @@ script:
   - export REPO=zakiyamanolx/hello  
   - docker build . -t $REPO:$COMMIT
   - docker tag $REPO:$COMMIT $REPO:latest
+  - docker push $REPO
   - docker logout
