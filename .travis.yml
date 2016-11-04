@@ -8,5 +8,13 @@ language: php
 php:
   - '7.0'
 
+env:
+  global:
+    - COMMIT=${TRAVIS_COMMIT::8}-travis-$TRAVIS_BUILD_NUMBER    
+
 script:
-  - docker build .
+  - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+  - export REPO=zakiyamanolx/hello  
+  - docker build . -t $REPO:$COMMIT
+  - docker tag $REPO:$COMMIT $REPO:latest
+  - docker logout
